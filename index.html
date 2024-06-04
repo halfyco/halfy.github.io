@@ -3,19 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Halfy Birthday Calculator</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Half-Birthday Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background-color: #ffeb3b;
+            border-radius: 50%;
+            padding: 50px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .container h1 {
+            font-size: 3em;
+            margin: 0;
+            color: #000;
+        }
+        .container input {
+            margin: 20px 0;
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+        }
+        .container button {
+            background-color: #000;
+            color: #ffeb3b;
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .container button:hover {
+            background-color: #333;
+        }
+        .container p {
+            font-size: 1.2em;
+            color: #000;
+        }
+        .logo {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .logo img {
+            width: 100px;
+            height: auto;
+        }
+    </style>
+    <script>
+        function addSixMonths() {
+            const dateInput = document.getElementById("date").value;
+            const inputDate = new Date(dateInput);
+
+            if (isNaN(inputDate)) {
+                alert("Please enter a valid date.");
+                return;
+            }
+
+            const resultDate = new Date(inputDate);
+            resultDate.setMonth(resultDate.getMonth() + 6);
+
+            // Adjust for year overflow (e.g., adding 6 months to October)
+            if (resultDate.getMonth() !== (inputDate.getMonth() + 6) % 12) {
+                resultDate.setDate(0);
+            }
+
+            const resultDateString = resultDate.toISOString().split('T')[0];
+            document.getElementById("result").innerText = "Half-Birthday: " + resultDateString;
+        }
+    </script>
 </head>
 <body>
-    <div class="calculator">
-        <h1>Halfy Birthday Calculator</h1>
-        <form id="birthdayForm">
-            <label for="birthday">Enter your birthday:</label>
-            <input type="date" id="birthday" name="birthday" required>
-            <button type="submit">Calculate Halfy Birthday</button>
-        </form>
-        <div id="result"></div>
+    <div class="container">
+        <div class="logo">
+            <img src="file-c1QsBaTRREAAoIy9skCk2E4U" alt="Halfy Logo">
+        </div>
+        <h1>Half-Birthday Calculator</h1>
+        <label for="date">Enter your birth date:</label>
+        <input type="date" id="date">
+        <button onclick="addSixMonths()">Calculate Half-Birthday</button>
+        <p id="result"></p>
     </div>
-    <script src="script.js"></script>
 </body>
 </html>
+
